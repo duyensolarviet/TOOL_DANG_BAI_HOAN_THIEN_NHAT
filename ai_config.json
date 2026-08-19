@@ -1,0 +1,296 @@
+{
+    "use_ai": true,
+    "ai_provider": "Gemini",
+    "history_mode": "continue",
+    "gemini_api_key": "",
+    "groq_api_key": "",
+    "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+    "tiktok_crawl_mode": "from_video",
+    "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+    "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+    "tiktok_max_videos": "1",
+    "tiktok_interval": "0.3",
+    "tiktok_dl_dir": "D:/AI tai video",
+    "accounts": {
+        "ok nh\u00e9 b\u00e9": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "reset",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "channel",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7655879091081596178",
+            "tiktok_max_videos": "3",
+            "tiktok_interval": "1.0",
+            "tiktok_dl_dir": "D:/AI tai video"
+        },
+        "\u00e1dasd": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "reset",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "https://www.q2.com/@duyensolarviet/video/7655879091081596178",
+            "tiktok_max_videos": "3",
+            "tiktok_download_all": false,
+            "tiktok_interval": "2.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "16",
+                "min": "3"
+            }
+        },
+        "vuduyen199xx@gmail.com": {
+            "ai_provider": "Gemini",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "1",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "23",
+                "min": "6"
+            }
+        },
+        "tai khoan be ty": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "reset",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "ok con  3333",
+            "tiktok_max_videos": "99999",
+            "tiktok_download_all": true,
+            "tiktok_interval": "200",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8q\u01b0e",
+                "y": "2026",
+                "h": "10",
+                "min": "2"
+            }
+        },
+        "tai khoan be xiu": {
+            "ai_provider": "Gemini",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "hello cac con v\u1ecd",
+            "tiktok_max_videos": "99999",
+            "tiktok_download_all": true,
+            "tiktok_interval": "1.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "10",
+                "min": "2"
+            }
+        },
+        "be nhu cai lol": {
+            "ai_provider": "Gemini",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "hello cac con v\u1ecd",
+            "tiktok_max_videos": "99999",
+            "tiktok_download_all": true,
+            "tiktok_interval": "1.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "10",
+                "min": "2"
+            }
+        },
+        "ok lon nhat": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "channel",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "hello cac con b\u1ed1 tao",
+            "tiktok_max_videos": "99999",
+            "tiktok_download_all": false,
+            "tiktok_interval": "1.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "10",
+                "min": "2"
+            }
+        },
+        "ok be nhat": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "channel",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "hello cac con b\u1ed1 tao",
+            "tiktok_max_videos": "99999",
+            "tiktok_download_all": false,
+            "tiktok_interval": "1.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "10",
+                "min": "2"
+            }
+        },
+        "sadsa": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "2",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "15",
+                "min": "53"
+            }
+        },
+        "\u00e1d": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "2",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "15",
+                "min": "34"
+            }
+        },
+        "as": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "2",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "15",
+                "min": "47"
+            }
+        },
+        "\u00c1\u00e1": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "2",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "15",
+                "min": "47"
+            }
+        },
+        "\u00e1dsad": {
+            "ai_provider": "Gemini",
+            "use_ai": true,
+            "history_mode": "continue",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@duyensolarviet",
+            "tiktok_start_video_url": "https://www.tiktok.com/@duyensolarviet/video/7583197883067895047",
+            "tiktok_max_videos": "2",
+            "tiktok_download_all": false,
+            "tiktok_interval": "0.3",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "16",
+                "min": "0"
+            }
+        },
+        "s\u00e1d": {
+            "ai_provider": "Groq",
+            "use_ai": true,
+            "history_mode": "reset",
+            "gemini_prompt": "Vi\u1ebft l\u1ea1i n\u1ed9i dung t\u01b0\u01a1ng \u0111\u01b0\u01a1ng v\u1edbi n\u1ed9i dung coppy v\u00e0 l\u00e0m sao \u0111\u1ec3 thu h\u00fat ng\u01b0\u1eddi xem , tuy\u1ec7t \u0111\u1ed1i kh\u00f4ng \u0111\u01b0\u1ee3c th\u00eam icon hay k\u00fd t\u1ef1 \u0111\u1eb7c bi\u1ec7t v\u00e0o n\u1ed9i dung.",
+            "tiktok_crawl_mode": "from_video",
+            "tiktok_url": "https://www.tiktok.com/@thaihong653705?_r=1&_t=ZS-98sSJOt7fhC",
+            "tiktok_start_video_url": "https://www.q2.com/@duyensolarviet/video/7655879091081596178",
+            "tiktok_max_videos": "3",
+            "tiktok_download_all": false,
+            "tiktok_interval": "2.0",
+            "tiktok_dl_dir": "D:/AI tai video",
+            "start_time": {
+                "d": "15",
+                "m": "8",
+                "y": "2026",
+                "h": "16",
+                "min": "3"
+            }
+        }
+    },
+    "tiktok_download_all": false,
+    "start_time": {
+        "d": "15",
+        "m": "8",
+        "y": "2026",
+        "h": "23",
+        "min": "6"
+    }
+}

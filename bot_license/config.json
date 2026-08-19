@@ -1,0 +1,38 @@
+{
+    "bot_token": "8642802772:AAHnTAjSH1D58zt8kbUu0JJ99blSrNoEAhQ",
+    "admin_ids": [8045343884],
+    "firebase_url": "",
+    "firebase_auth_secret": "",
+    "default_packages": {
+        "1_month": {
+            "name": "1 Tháng",
+            "days": 30,
+            "prefix": "VD-1M"
+        },
+        "3_months": {
+            "name": "3 Tháng",
+            "days": 90,
+            "prefix": "VD-3M"
+        },
+        "6_months": {
+            "name": "6 Tháng",
+            "days": 180,
+            "prefix": "VD-6M"
+        },
+        "1_year": {
+            "name": "1 Năm",
+            "days": 365,
+            "prefix": "VD-1Y"
+        },
+        "lifetime": {
+            "name": "Vĩnh Viễn",
+            "days": 9999,
+            "prefix": "VD-VIP"
+        },
+        "trial_1day": {
+            "name": "Dùng Thử 1 Ngày",
+            "days": 1,
+            "prefix": "VD-TEST"
+        }
+    }
+}

@@ -1,0 +1,13 @@
+customtkinter==5.2.2
+selenium==4.23.1
+undetected-chromedriver==3.5.5
+pyotp==2.9.0
+pyautogui
+pyperclip
+moviepy
+imageio-ffmpeg
+groq
+google-generativeai
+requests
+Pillow
+pyTelegramBotAPI

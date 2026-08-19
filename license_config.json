@@ -1,0 +1,37 @@
+{
+    "firebase_url": "",
+    "firebase_auth_secret": "",
+    "enable_auto_trial": false,
+    "trial_days": 0,
+    "telegram_support": "https://t.me/keydangbaiall_bot",
+    "telegram_admin": "https://t.me/keydangbaiall_bot",
+    "zalo_support": "https://zalo.me/g/mmgznzbleun8cirr19ld",
+    "hotline": "",
+    "packages": {
+        "1_month": {
+            "name": "Gói 1 Tháng (30 Ngày)",
+            "days": 30,
+            "price": "200.000 VNĐ"
+        },
+        "3_months": {
+            "name": "Gói 3 Tháng (90 Ngày)",
+            "days": 90,
+            "price": "500.000 VNĐ"
+        },
+        "6_months": {
+            "name": "Gói 6 Tháng (180 Ngày)",
+            "days": 180,
+            "price": "900.000 VNĐ"
+        },
+        "1_year": {
+            "name": "Gói 1 Năm (365 Ngày)",
+            "days": 365,
+            "price": "1.500.000 VNĐ"
+        },
+        "lifetime": {
+            "name": "Gói Vĩnh Viễn",
+            "days": 9999,
+            "price": "3.000.000 VNĐ"
+        }
+    }
+}
