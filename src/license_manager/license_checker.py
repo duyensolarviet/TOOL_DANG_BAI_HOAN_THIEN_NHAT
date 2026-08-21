@@ -73,23 +73,27 @@ class LicenseChecker:
                 self.clear_cache()
                 return False, "Mã thiết bị không khớp với bản quyền đã lưu!", None
 
-            cloud_key = None
-            try:
-                cloud_key = self.storage.get_key(saved_key)
-            except Exception as e:
-                print(f"[LicenseChecker] Cloud check error: {e}")
+            if self.storage.is_cloud_enabled():
+                cloud_key = None
+                try:
+                    cloud_key = self.storage.get_key(saved_key)
+                except Exception as e:
+                    print(f"[LicenseChecker] Cloud check error: {e}")
 
-            if cloud_key:
-                is_valid, msg, lic = self._evaluate_key(cloud_key)
-                if is_valid:
-                    return True, msg, lic
+                if cloud_key:
+                    is_valid, msg, lic = self._evaluate_key(cloud_key)
+                    if is_valid:
+                        return True, msg, lic
+                    else:
+                        self.clear_cache()
+                        return False, msg, None
                 else:
+                    # Key was deleted from Cloud storage -> Revoke immediately!
                     self.clear_cache()
-                    return False, msg, None
+                    return False, "Mã Key bản quyền đã bị xóa khỏi hệ thống hoặc không còn tồn tại!", None
             else:
-                # Key was deleted from storage (Local DB or Cloud) -> Revoke immediately!
-                self.clear_cache()
-                return False, "Mã Key bản quyền đã bị xóa khỏi hệ thống hoặc không còn tồn tại!", None
+                # Cloud is disabled (Offline signed token or local mode) -> evaluate cached license directly!
+                return self._evaluate_key(cache)
 
         # 2. Check if this HWID was activated directly online by Admin
         try:

@@ -2,6 +2,8 @@ import os
 import sys
 import json
 import re
+import time
+import threading
 import random
 import string
 import datetime
@@ -225,12 +227,13 @@ def get_main_menu_markup():
     b6 = types.InlineKeyboardButton("📊 Thống Kê Key", callback_data="menu_stats")
     b7 = types.InlineKeyboardButton("🟢 Thống Kê Online", callback_data="menu_online_stats")
     b8 = types.InlineKeyboardButton("🔍 Tra Cứu Key / HWID", callback_data="menu_search_key")
-    b9 = types.InlineKeyboardButton("⚙ Cài Đặt / Kết Nối", callback_data="menu_settings")
+    b9 = types.InlineKeyboardButton("💾 Sao Lưu Dữ Liệu (Backup)", callback_data="menu_backup_data")
+    b10 = types.InlineKeyboardButton("⚙ Cài Đặt / Kết Nối", callback_data="menu_settings")
     markup.add(b1, b2)
     markup.add(b3, b4)
     markup.add(b5, b6)
     markup.add(b7, b8)
-    markup.add(b9)
+    markup.add(b9, b10)
     return markup
 
 def get_gen_package_markup(target_hwid: str = ""):
@@ -333,9 +336,16 @@ def handle_help(message):
         "🔹 <code>/delkey [mã_key]</code> : Xóa vĩnh viễn key\n"
         "🔹 <code>/stats</code> : Thống kê tổng quan tất cả key\n"
         "🔹 <code>/online</code> : Thống kê người dùng online\n"
+        "🔹 <code>/backup</code> : Tải file sao lưu dữ liệu (.json) ngay lập tức\n"
         "━━━━━━━━━━━━━━━━━━━━━━"
     )
     safe_send_message(message.chat.id, text)
+
+@bot.message_handler(commands=['backup', 'export', 'saoluu'])
+def handle_backup_cmd(message):
+    if not is_admin(message.from_user.id): return
+    safe_send_message(message.chat.id, "⏳ <i>Đang đóng gói và xuất file sao lưu dữ liệu...</i>")
+    send_backup_data(message.chat.id, is_auto=False)
 
 @bot.message_handler(commands=['stats'])
 def handle_stats_cmd(message):
@@ -634,6 +644,11 @@ def handle_callbacks(call):
         show_online_stats(call.message.chat.id, call.message.message_id)
         return
 
+    elif data == "menu_backup_data":
+        safe_send_message(call.message.chat.id, "⏳ <i>Đang đóng gói và xuất file sao lưu dữ liệu...</i>")
+        send_backup_data(call.message.chat.id, is_auto=False)
+        return
+
     elif data == "menu_settings":
         cfg = load_bot_config()
         db_url = cfg.get('firebase_url') or 'Chưa cấu hình (Đang dùng Local DB)'
@@ -785,20 +800,32 @@ def create_and_bind_key_for_hwid(chat_id, target_hwid: str, package_type: str, d
     saved = storage.save_key(key_data)
     storage.save_device_license(target_hwid.strip(), key_data)
 
+    signed_token = generate_signed_license_token(
+        hwid=target_hwid.strip(),
+        key_code=key_code,
+        package=package_type,
+        duration_days=days_float,
+        duration_label=pkg_name,
+        expires_at=exp_str,
+        created_at=now_str,
+        note=note
+    )
+
     if saved:
         text = (
-            "🎉 <b>TẠO KEY BẢN QUYỀN THÀNH CÔNG!</b>\n"
+            "🎉 <b>KÍCH HOẠT BẢN QUYỀN THÀNH CÔNG!</b>\n"
             "━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"🔑 <b>Mã Key:</b> <code>{key_code}</code> <i>(Chạm để sao chép)</i>\n"
-            f"💻 <b>Mã HWID:</b> <code>{html.escape(target_hwid)}</code>\n"
-            f"📦 <b>Gói cước:</b> {pkg_name}\n"
-            f"📅 <b>Kích hoạt lúc:</b> <code>{now_str}</code>\n"
+            f"💻 <b>Mã Thiết Bị (HWID):</b> <code>{html.escape(target_hwid)}</code>\n"
+            f"📦 <b>Gói:</b> {pkg_name} ({days_float} ngày)\n"
             f"⏳ <b>Hạn dùng đến:</b> <code>{exp_str}</code>\n"
+            f"🔑 <b>Mã Quản Lý (Key):</b> <code>{key_code}</code>\n"
             f"📝 <b>Ghi chú:</b> {html.escape(note or 'Gói ' + pkg_name)}\n"
-            "📊 <b>Trạng thái:</b> 🟢 Đang Dùng\n"
             "━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"💡 <b>HƯỚNG DẪN KHÁCH:</b>\n"
-            f"Dán mã Key <code>{key_code}</code> vào ô kích hoạt trên Tool để mở khóa phần mềm."
+            "🔐 <b>MÃ KÍCH HOẠT CHO KHÁCH (CHẠM ĐỂ COPY):</b>\n\n"
+            f"<code>{signed_token}</code>\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "💡 <b>HƯỚNG DẪN GỬI KHÁCH:</b>\n"
+            "Gửi đoạn mã <code>LIC-...</code> bên trên cho khách. Khách mở Tool dán vào là <b>KÍCH HOẠT DÙNG ĐƯỢC NGAY 100% TRÊN MÁY KHÁCH</b> (Khóa đúng máy khách, không thể chia sẻ sang máy khác)!"
         )
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("⏳ Gia Hạn Thêm Thời Gian", callback_data=f"act_ext_{key_code}"))
@@ -835,8 +862,12 @@ def create_and_send_key(chat_id, package_type, delta: datetime.timedelta, pkg_na
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
     days_float = round(delta.total_seconds() / 86400, 2)
 
+    exp_dt = now + delta
+    exp_str = exp_dt.strftime("%Y-%m-%d %H:%M:%S")
+
     key_data = {
         "key": key_code,
+        "type": "paid",
         "package": package_type,
         "duration_label": pkg_name,
         "duration_days": days_float,
@@ -851,17 +882,33 @@ def create_and_send_key(chat_id, package_type, delta: datetime.timedelta, pkg_na
     }
 
     saved = storage.save_key(key_data)
+
+    signed_token = generate_signed_license_token(
+        hwid="ANY",
+        key_code=key_code,
+        package=package_type,
+        duration_days=days_float,
+        duration_label=pkg_name,
+        expires_at=exp_str,
+        created_at=now_str,
+        note=note
+    )
+
     if saved:
         clean_note = html.escape(note or "Không có")
         text = (
             "🎉 <b>TẠO KEY BẢN QUYỀN THÀNH CÔNG!</b>\n"
             "━━━━━━━━━━━━━━━━━━━━━━\n"
-            f"🔑 <b>Mã Key:</b> <code>{key_code}</code> <i>(Chạm vào mã để sao chép)</i>\n"
-            f"📦 <b>Thời hạn:</b> {pkg_name}\n"
+            f"🔑 <b>Mã Key:</b> <code>{key_code}</code>\n"
+            f"📦 <b>Thời hạn:</b> {pkg_name} ({days_float} ngày)\n"
             f"📅 <b>Ngày tạo:</b> <code>{now_str}</code>\n"
             f"📝 <b>Ghi chú:</b> {clean_note}\n"
             "━━━━━━━━━━━━━━━━━━━━━━\n"
-            "💡 <b>Gửi cho khách:</b> Mở tool, dán mã Key này vào ô kích hoạt để mở khóa phần mềm."
+            "🔐 <b>MÃ KÍCH HOẠT TOÀN NĂNG (GỬI CHO KHÁCH):</b>\n\n"
+            f"<code>{signed_token}</code>\n\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "💡 <b>HƯỚNG DẪN:</b>\n"
+            "Gửi mã <code>LIC-...</code> trên cho khách. Máy nào dán vào kích hoạt đầu tiên sẽ <b>TỰ ĐỘNG KHÓA VÀO MÁY ĐÓ</b> và sử dụng ngay lập tức!"
         )
         markup = types.InlineKeyboardMarkup()
         markup.add(types.InlineKeyboardButton("➕ Cấp Thêm Key Khác", callback_data="menu_gen_key"))
@@ -959,6 +1006,17 @@ def show_key_detail(chat_id, key_code: str, message_id=None):
             else:
                 time_left_str = f" (Còn {max(1, diff.seconds // 60)} phút)"
 
+    signed_token = generate_signed_license_token(
+        hwid=hwid if hwid and "Chưa" not in hwid else "ANY",
+        key_code=key_code,
+        package=data.get("package", "custom"),
+        duration_days=data.get("duration_days", 30),
+        duration_label=dur_label,
+        expires_at=exp_at if "Chưa" not in exp_at else "",
+        created_at=created_at if "Chưa" not in created_at else None,
+        note=data.get("note", "")
+    )
+
     text = (
         "🔑 <b>THÔNG TIN CHI TIẾT KEY</b>\n"
         "━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -972,6 +1030,9 @@ def show_key_detail(chat_id, key_code: str, message_id=None):
         f"⏳ <b>Hạn dùng đến:</b> <code>{html.escape(exp_at)}</code>{time_left_str}\n"
         f"🟢 <b>Online lần cuối:</b> <code>{html.escape(last_seen)}</code>\n"
         f"📝 <b>Ghi chú:</b> {note}\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n"
+        "🔐 <b>Mã Kích Hoạt Ký Số Cho Khách:</b>\n"
+        f"<code>{signed_token}</code>\n"
         "━━━━━━━━━━━━━━━━━━━━━━"
     )
 
@@ -1080,13 +1141,28 @@ def execute_extend_key_delta(chat_id, target: str, delta: datetime.timedelta, la
         data["status"] = "active"
         storage.save_device_license(hwid, data)
 
+    signed_token = generate_signed_license_token(
+        hwid=hwid or "ANY",
+        key_code=key,
+        package=data.get("package", "custom"),
+        duration_days=data.get("duration_days", 30),
+        duration_label=data.get("duration_label", "Gia hạn"),
+        expires_at=new_exp_str,
+        note=data.get("note", "")
+    )
+
     if updated:
         safe_send_message(
             chat_id,
             f"🎉 <b>ĐÃ GIA HẠN THÀNH CÔNG (+{label})!</b>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
             f"🔑 <b>Key:</b> <code>{html.escape(key)}</code>\n"
             f"💻 <b>Mã máy:</b> <code>{html.escape(hwid or 'Chưa gán')}</code>\n"
-            f"⏳ <b>Hạn dùng mới đến:</b> <code>{new_exp_str}</code>"
+            f"⏳ <b>Hạn dùng mới đến:</b> <code>{new_exp_str}</code>\n"
+            "━━━━━━━━━━━━━━━━━━━━━━\n"
+            "🔐 <b>MÃ KÍCH HOẠT MỚI CHO KHÁCH (CHẠM ĐỂ COPY):</b>\n\n"
+            f"<code>{signed_token}</code>\n\n"
+            "<i>(Gửi mã này cho khách để cập nhật thời hạn trên máy của họ)</i>"
         )
     else:
         safe_send_message(chat_id, "❌ Lỗi khi cập nhật thời hạn trên cơ sở dữ liệu.")
@@ -1399,6 +1475,103 @@ def show_online_stats(chat_id, message_id=None):
     else:
         safe_send_message(chat_id, text, reply_markup=markup)
 
+# ==================== BACKUP SYSTEM ====================
+
+def send_backup_data(chat_id=None, is_auto=False):
+    """
+    Exports the local database file (and/or cloud data),
+    compiles a clean readable summary, and sends it directly to Admin Telegram.
+    """
+    keys = storage.list_all_keys()
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    date_str = datetime.datetime.now().strftime("%d-%m-%Y")
+    
+    total = len(keys)
+    active = sum(1 for k in keys if k.get("status") == "active")
+    banned = sum(1 for k in keys if k.get("status") == "banned")
+    devices = sum(1 for k in keys if k.get("hwid"))
+
+    tag = "⏰ <b>BÁO CÁO SAO LƯU DỮ LIỆU TỰ ĐỘNG HÀNG NGÀY</b>" if is_auto else "💾 <b>SAO LƯU DỮ LIỆU BẢN QUYỀN (BACKUP)</b>"
+    caption = (
+        f"{tag}\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n"
+        f"📅 <b>Thời gian:</b> <code>{now_str}</code>\n"
+        f"📊 <b>Tổng số Key:</b> <b>{total}</b> mã\n"
+        f"🟢 <b>Đang hoạt động:</b> {active} | 🚫 <b>Đã khóa:</b> {banned}\n"
+        f"💻 <b>Máy đã liên kết:</b> {devices} thiết bị\n"
+        "━━━━━━━━━━━━━━━━━━━━━━\n"
+        "📁 <i>File database <code>local_keys_db.json</code> đính kèm bên dưới chứa 100% toàn bộ thông tin Key & Thiết bị. Bạn có thể lưu lại file này để dự phòng an toàn tuyệt đối!</i>"
+    )
+
+    db_path = storage.local_db_path
+    if not os.path.exists(db_path):
+        alt_path = os.path.join(BASE_DIR, "local_keys_db.json")
+        if os.path.exists(alt_path):
+            db_path = alt_path
+
+    # If in cloud mode or file not on disk, also generate an on-the-fly JSON file
+    temp_json_path = None
+    if not os.path.exists(db_path):
+        try:
+            temp_json_path = os.path.join(BASE_DIR, f"temp_backup_{date_str}.json")
+            full_data = {"_devices": {}, **{k.get("key"): k for k in keys if k.get("key")}}
+            with open(temp_json_path, "w", encoding="utf-8") as f:
+                json.dump(full_data, f, indent=4, ensure_ascii=False)
+            db_path = temp_json_path
+        except Exception:
+            pass
+
+    recipients = [chat_id] if chat_id else ADMIN_IDS
+
+    for cid in recipients:
+        if not cid: continue
+        try:
+            if db_path and os.path.exists(db_path):
+                with open(db_path, "rb") as f:
+                    bot.send_document(
+                        cid,
+                        f,
+                        caption=caption,
+                        parse_mode="HTML",
+                        visible_file_name=f"backup_keys_{date_str}.json"
+                    )
+            else:
+                safe_send_message(cid, f"{caption}\n\n⚠️ <i>(Chưa có file database vật lý cục bộ)</i>")
+        except Exception as e:
+            print(f"[Backup] Error sending backup to {cid}: {e}")
+            try:
+                safe_send_message(cid, f"{caption}\n\n⚠️ Lỗi khi gửi file đính kèm: {e}")
+            except Exception:
+                pass
+
+    if temp_json_path and os.path.exists(temp_json_path):
+        try:
+            os.remove(temp_json_path)
+        except Exception:
+            pass
+
+def daily_backup_scheduler_worker():
+    """
+    Background worker that runs continuously and sends the database backup
+    to all admins every day at 08:00 AM (Vietnam time).
+    """
+    last_sent_date = ""
+    while True:
+        try:
+            now = datetime.datetime.now()
+            today_str = now.strftime("%Y-%m-%d")
+            
+            # Send once every day at 08:00 AM
+            if now.hour == 8 and last_sent_date != today_str:
+                last_sent_date = today_str
+                print(f"[DailyBackup] Triggering automated daily backup for {today_str}...")
+                send_backup_data(is_auto=True)
+                
+            time.sleep(30)
+        except Exception as e:
+            print(f"[DailyBackup] Scheduler error: {e}")
+            time.sleep(60)
+
 # ==================== MAIN RUNNER ====================
 
 def start_bot_polling():
@@ -1415,7 +1588,10 @@ def start_bot_polling():
     except Exception:
         pass
 
-    import time
+    # Start automated daily backup scheduler in background
+    threading.Thread(target=daily_backup_scheduler_worker, daemon=True).start()
+    print("⏰ Đã kích hoạt luồng Tự Động Sao Lưu Dữ Liệu Hàng Ngày (Auto Daily Backup lúc 08:00 AM)")
+
     while True:
         try:
             bot.polling(none_stop=True, interval=1, timeout=20)

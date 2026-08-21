@@ -149,7 +149,7 @@ class ActivationViewMixin:
 
         self.key_entry = ctk.CTkEntry(
             key_frame,
-            placeholder_text="Nhập mã key (Ví dụ: VD-1M-XXXXXX hoặc VD-1Y-XXXXXX)...",
+            placeholder_text="Dán mã kích hoạt từ Telegram Bot (LIC-... hoặc mã Key)...",
             font=ctk.CTkFont(family="Consolas", size=12),
             height=34,
             fg_color="#0f172a",

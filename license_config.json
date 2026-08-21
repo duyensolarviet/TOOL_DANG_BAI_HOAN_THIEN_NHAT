@@ -1,5 +1,5 @@
 {
-    "firebase_url": "",
+    "firebase_url": "https://vuduyen-tools-default-rtdb.firebaseio.com",
     "firebase_auth_secret": "",
     "enable_auto_trial": false,
     "trial_days": 0,

@@ -1,7 +1,7 @@
 {
     "bot_token": "8642802772:AAHnTAjSH1D58zt8kbUu0JJ99blSrNoEAhQ",
     "admin_ids": [8045343884],
-    "firebase_url": "",
+    "firebase_url": "https://vuduyen-tools-default-rtdb.firebaseio.com",
     "firebase_auth_secret": "",
     "default_packages": {
         "1_month": {
